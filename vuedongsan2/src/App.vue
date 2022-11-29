@@ -1,12 +1,21 @@
 <template>
+<div @click="closeModal()" class="black-bg" v-if="모달창열렸니 == true">
+  <div class="white-bg">
+    <h4>상세페이지</h4>
+    <p>상세페이지내용임</p>
+  </div>
+</div>
 <div class="menu">
   <div class="menu">
     <a v-for="작명 in 메뉴들" :key="작명">{{작명}}</a>
   </div>
 </div>
 <div v-for="(작명, i) in productsDetail" :key="i">
-  <h4>{{productsDetail[i].products}}</h4>
+  <img @click="showDetailModal()" :src="productsDetail[i].img">
+  <h4 @click="showDetailModal()">{{productsDetail[i].products}}</h4>
   <p>{{productsDetail[i].price}}</p>
+  <button @click="increase(i)">허위매물신고</button>
+  <span>신고수 : {{productsDetail[i].신고수}}</span>
 </div>
 </template>
 
@@ -16,14 +25,27 @@ export default {
   name : 'App',
   data(){
     return {
+      모달창열렸니 : false,
       products : ['역삼동원룸', '천호동원룸', '마포구원룸'],
       메뉴들 : ['Home', 'Shop', 'About'],
       price : ['60', '50', '40'],
       productsDetail : [
-        {products : '역삼동원룸', price : '60'},
-        {products : '천호동원룸', price : '50'},
-        {products : '마포구원룸', price : '40'}
+        {products : '역삼동원룸', price : '60', 신고수 : 0, img: require('./assets/pepe1.png')},
+        {products : '천호동원룸', price : '50', 신고수 : 0, img: require('./assets/pepe2.jpg')},
+        {products : '마포구원룸', price : '40', 신고수 : 0, img: require('./assets/pepe3.jpeg')}
       ]
+    }
+  },
+
+  methods : {
+    increase(i){
+      this.productsDetail[i].신고수 += 1;
+    },
+    showDetailModal(){
+     this.모달창열렸니 = true;
+    },
+    closeModal(){
+      this.모달창열렸니 = false;
     }
   }
 }
@@ -36,7 +58,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 .menu {
   background : darkslateblue;
@@ -47,4 +68,23 @@ export default {
   color : white;
   padding : 10px;
 }
+img {
+  width: 300px;
+}
+body {
+  margin : 0;
+}
+div {
+  box-sizing: border-box;
+}
+.black-bg {
+  width: 100%; height:100%;
+  background: rgba(0,0,0,0.5);
+  position: fixed; padding: 20px;
+}
+.white-bg {
+  width: 100%; background: white;
+  border-radius: 8px;
+  padding: 20px;
+} 
 </style>
