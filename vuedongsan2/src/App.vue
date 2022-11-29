@@ -1,27 +1,27 @@
 <template>
-<div @click="closeModal()" class="black-bg" v-if="모달창열렸니 == true">
-  <div class="white-bg">
-    <img :src="productsDetail[i].image">
-    <h4>{{productsDetail[i].title}}</h4>
-    <p>{{productsDetail[i].price}}</p>
-  </div>
-</div>
+<ProductModal></ProductModal>
 <div class="menu">
   <div class="menu">
     <a v-for="작명 in 메뉴들" :key="작명">{{작명}}</a>
   </div>
 </div>
+
+<DiscountProduct :productsDetail="productsDetail" :for="i"></DiscountProduct>
+
 <div v-for="(작명, i) in productsDetail" :key="i">
   <img @click="showDetailModal(i)" :src="productsDetail[i].image">
   <h4 @click="showDetailModal(i)">{{productsDetail[i].title}}</h4>
   <p>{{productsDetail[i].price}}</p>
   <button @click="increase(i)">허위매물신고</button>
-  <span>신고수 : {{productsDetail[i].report}}</span>
+  <span>신고수 : {{productsDetail[ i].report}}</span>
 </div>
 </template>
 
 <script>
 import productsDetail from './assets/oneroom.js';
+import DiscountProduct from './DiscountProduct.vue';
+import ProductModal from './ProductModal.vue';
+
 export default {
   name : 'App',
   data(){
@@ -43,11 +43,22 @@ export default {
     closeModal(){
       this.모달창열렸니 = false;
     }
+  },
+
+  components: {
+    DiscountProduct : DiscountProduct,
+    ProductModal : ProductModal
   }
 }
 </script>
 
 <style>
+.discount {
+  background: #eee;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
