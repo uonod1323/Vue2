@@ -1,8 +1,9 @@
 <template>
 <div @click="closeModal()" class="black-bg" v-if="모달창열렸니 == true">
   <div class="white-bg">
-    <h4>상세페이지</h4>
-    <p>상세페이지내용임</p>
+    <img :src="productsDetail[i].image">
+    <h4>{{productsDetail[i].title}}</h4>
+    <p>{{productsDetail[i].price}}</p>
   </div>
 </div>
 <div class="menu">
@@ -11,38 +12,33 @@
   </div>
 </div>
 <div v-for="(작명, i) in productsDetail" :key="i">
-  <img @click="showDetailModal()" :src="productsDetail[i].img">
-  <h4 @click="showDetailModal()">{{productsDetail[i].products}}</h4>
+  <img @click="showDetailModal(i)" :src="productsDetail[i].image">
+  <h4 @click="showDetailModal(i)">{{productsDetail[i].title}}</h4>
   <p>{{productsDetail[i].price}}</p>
   <button @click="increase(i)">허위매물신고</button>
-  <span>신고수 : {{productsDetail[i].신고수}}</span>
+  <span>신고수 : {{productsDetail[i].report}}</span>
 </div>
 </template>
 
 <script>
-
+import productsDetail from './assets/oneroom.js';
 export default {
   name : 'App',
   data(){
     return {
       모달창열렸니 : false,
-      products : ['역삼동원룸', '천호동원룸', '마포구원룸'],
       메뉴들 : ['Home', 'Shop', 'About'],
-      price : ['60', '50', '40'],
-      productsDetail : [
-        {products : '역삼동원룸', price : '60', 신고수 : 0, img: require('./assets/pepe1.png')},
-        {products : '천호동원룸', price : '50', 신고수 : 0, img: require('./assets/pepe2.jpg')},
-        {products : '마포구원룸', price : '40', 신고수 : 0, img: require('./assets/pepe3.jpeg')}
-      ]
+      productsDetail : productsDetail,
     }
   },
 
   methods : {
     increase(i){
-      this.productsDetail[i].신고수 += 1;
+      this.productsDetail[i].report += 1;
     },
-    showDetailModal(){
+    showDetailModal(i){
      this.모달창열렸니 = true;
+     this.i = i;
     },
     closeModal(){
       this.모달창열렸니 = false;
