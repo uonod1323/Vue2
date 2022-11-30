@@ -7,25 +7,20 @@
 </div>
 
 <DiscountProduct :productsDetail="productsDetail" :for="i"></DiscountProduct>
-
-<div v-for="(작명, i) in productsDetail" :key="i">
-  <img @click="showDetailModal(i)" :src="productsDetail[i].image">
-  <h4 @click="showDetailModal(i)">{{productsDetail[i].title}}</h4>
-  <p>{{productsDetail[i].price}}</p>
-  <button @click="increase(i)">허위매물신고</button>
-  <span>신고수 : {{productsDetail[ i].report}}</span>
-</div>
+<ProductList :productsDetail="productsDetail" ></ProductList>
 </template>
 
 <script>
 import productsDetail from './assets/oneroom.js';
 import DiscountProduct from './DiscountProduct.vue';
 import ProductModal from './ProductModal.vue';
+import ProductList from './ProductList.vue';
 
 export default {
   name : 'App',
   data(){
     return {
+      오브젝트 : { name : 'kim' , age : 20},
       모달창열렸니 : false,
       메뉴들 : ['Home', 'Shop', 'About'],
       productsDetail : productsDetail,
@@ -47,7 +42,8 @@ export default {
 
   components: {
     DiscountProduct : DiscountProduct,
-    ProductModal : ProductModal
+    ProductModal : ProductModal,
+    ProductList : ProductList
   }
 }
 </script>
