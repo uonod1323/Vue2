@@ -9,7 +9,6 @@ export default {
     name: 'DiscountProduct',
     data(){
         return{
-
         }
     }
 }

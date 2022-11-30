@@ -1,10 +1,8 @@
 <template>
-  <div v-for="(작명, i) in productsDetail" :key="i">
-    <img @click="showDetailModal(i)" :src="productsDetail[i].image">
-    <h4 @click="showDetailModal(i)">{{productsDetail[i].title}}</h4>
-    <p>{{productsDetail[i].price}}</p>
-    <button @click="increase(i)">허위매물신고</button>
-    <span>신고수 : {{productsDetail[i].report}}</span>
+  <div>
+    <img :src="productsDetail.image">
+    <h4 @click="함수">{{productsDetail.title}}</h4>
+    <p>{{productsDetail.price}}원</p>
   </div>
 </template>
 
@@ -12,7 +10,12 @@
 export default {
     name: 'ProductList',
     props : {
-      productsDetail : Array,
+      productsDetail : Object,
+    },
+    methods : {
+      함수(){
+        this.$emit('openModal', this.productsDetail.id)
+      }
     }
 }
 </script>
