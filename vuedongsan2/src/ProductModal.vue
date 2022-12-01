@@ -18,6 +18,13 @@ export default {
         month : 1, 
       }
     },
+    watch : {
+      month(a){
+        if(13 <= a){
+          alert('13이상입력ㄴㄴ해');
+        }
+      },
+    },
     props : {
       productsDetail : Array,
       모달창열렸니 : String,
