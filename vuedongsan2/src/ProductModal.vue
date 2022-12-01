@@ -20,11 +20,14 @@ export default {
     },
     watch : {
       month(a){
-        if(13 <= a){
-          alert('13이상입력ㄴㄴ해');
-        }
+        const reg = /[^0-9]/g;
+          if(reg.exec(a)!==null) {
+            alert('숫자만 입력가능합니다!');
+            this.month = 1;
+            return;
+          }
+      }
       },
-    },
     props : {
       productsDetail : Array,
       모달창열렸니 : String,
