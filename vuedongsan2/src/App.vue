@@ -1,5 +1,7 @@
 <template>
+  <div class="start end">
   <ProductModal @closeModal ="모달창열렸니=false"  :productsDetail="productsDetail" :모달창열렸니="모달창열렸니" :누른거="누른거"></ProductModal>
+</div>
   <div class="menu">
     <div class="menu">
       <a v-for="작명 in 메뉴들" :key="작명">{{작명}}</a>
@@ -8,8 +10,8 @@
 
   <DiscountProduct :productsDetail="productsDetail"></DiscountProduct>
   
-  <ProductList @openModal="모달창열렸니=true; 누른거 = i" :productsDetail="productsDetail[i]" v-for="(작명,i) in productsDetail" :key="i" ></ProductList>
-
+  
+    <ProductList @openModal="모달창열렸니=true; 누른거 = i" :productsDetail="productsDetail[i]" v-for="(작명,i) in productsDetail" :key="i" ></ProductList>
 </template>
 
 <script>
@@ -44,6 +46,13 @@ export default {
 </script>
 
 <style>
+.start{
+  opacity: 0;
+  transition: all 1s;
+}
+.end{
+  opacity: 1;
+}
 .discount {
   background: #eee;
   padding: 10px;
