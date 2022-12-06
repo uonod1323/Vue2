@@ -1,7 +1,13 @@
 <template>
-  <div class="start end">
-  <ProductModal @closeModal ="모달창열렸니=false"  :productsDetail="productsDetail" :모달창열렸니="모달창열렸니" :누른거="누른거"></ProductModal>
-</div>
+  
+  <Transition name="fade">
+    <ProductModal @closeModal ="모달창열렸니=false"
+      :productsDetail="productsDetail"
+       :모달창열렸니="모달창열렸니" 
+       :누른거="누른거" />
+  </Transition>
+
+
   <div class="menu">
     <div class="menu">
       <a v-for="작명 in 메뉴들" :key="작명">{{작명}}</a>
@@ -46,13 +52,17 @@ export default {
 </script>
 
 <style>
-.start{
-  opacity: 0;
-  transition: all 1s;
+.fade-enter-from {
+  opacity : 0;
 }
-.end{
-  opacity: 1;
+.fade-enter-active {
+  transition: all 0.3s;
 }
+.fade-enter-to {
+  opacity : 1;
+}
+
+
 .discount {
   background: #eee;
   padding: 10px;
