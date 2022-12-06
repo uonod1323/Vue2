@@ -15,6 +15,11 @@
   </div>
 
   <DiscountProduct :productsDetail="productsDetail"></DiscountProduct>
+
+  <button @click= "priceSort">정렬(낮은가격순)</button>
+  <button @click= "priceSortReverse">정렬(높은가격순)</button>
+  <button @click= "sortBack">되돌리기</button>
+  <button @click= "sortABC">이름순정렬</button>
   
   
     <ProductList @openModal="모달창열렸니=true; 누른거 = i" :productsDetail="productsDetail[i]" v-for="(작명,i) in productsDetail" :key="i" ></ProductList>
@@ -30,6 +35,7 @@ export default {
   name : 'App',
   data(){
     return {
+      productsDetailOriginal : [...productsDetail],
       누른거 : '',
       모달창열렸니 : false,
       메뉴들 : ['Home', 'Shop', 'About'],
@@ -41,6 +47,24 @@ export default {
     increase(i){
       this.productsDetail[i].report += 1;
     },
+    priceSort(){
+      this.productsDetail.sort(function(a,b){
+        return a.price - b.price;
+      });
+    },
+    priceSortReverse(){
+      this.productsDetail.sort(function(a,b){
+        return b.price - a.price;
+      });
+    },
+    sortABC(){
+      this.productsDetail.sort(function(a,b){
+        return a.title.localeCompare(b.title)
+      });
+    },
+    sortBack(){
+      this.productsDetail = [...this.productsDetailOriginal];
+    }
   },
 
   components: {
@@ -52,6 +76,7 @@ export default {
 </script>
 
 <style>
+
 .fade-enter-from {
   opacity : 0;
 }
