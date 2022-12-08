@@ -14,7 +14,7 @@
     </div>
   </div>
 
-  <DiscountProduct :productsDetail="productsDetail"></DiscountProduct>
+  <DiscountProduct :countNumber="countNumber" v-if="showDiscount == true"/>
 
   <button @click= "priceSort">정렬(낮은가격순)</button>
   <button @click= "priceSortReverse">정렬(높은가격순)</button>
@@ -35,12 +35,23 @@ export default {
   name : 'App',
   data(){
     return {
+      countNumber : 30,
+      showDiscount : true,
       productsDetailOriginal : [...productsDetail],
       누른거 : '',
       모달창열렸니 : false,
       메뉴들 : ['Home', 'Shop', 'About'],
       productsDetail : productsDetail,
     }
+  },
+
+  mounted() {
+    const interval = setInterval(() => {
+      this.countNumber--;
+      if (this.countNumber === 0) {
+        clearInterval(interval);
+      }
+    }, 1000);
   },
 
   methods : {

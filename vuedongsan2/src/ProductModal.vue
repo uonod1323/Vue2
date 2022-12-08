@@ -33,6 +33,17 @@ export default {
       모달창열렸니 : String,
       누른거 : String
     },
+    
+    updated() {
+      const interval = setInterval(() => {
+      if(this.month == 2){
+        alert("2개월은 안받아요");
+        this.month = 1;
+      }else{
+        clearInterval(interval);
+      }
+      }, 500);
+    },
     methods : {
       closeModal(){
         this.$emit('closeModal');
