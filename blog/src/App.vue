@@ -40,14 +40,23 @@
   <p>Vue</p>
 </div>
 
+<TitleList :TitleListArray="TitleListArray"/>
+
 </template>
 
 <script>
-
+import TitleList from './components/TitleList.vue';
+import TitleListArray from './assets/titlelist.js';
 
 export default {
-  name: 'App',
+  name: 'App',  
+  data(){
+    return {
+      TitleListArray : TitleListArray,
+    }
+  },
   components: {
+    TitleList : TitleList,
   }
 }
 
