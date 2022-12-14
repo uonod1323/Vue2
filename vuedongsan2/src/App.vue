@@ -1,12 +1,10 @@
-<template>
-  
+<template>  
   <Transition name="fade">
     <ProductModal @closeModal ="모달창열렸니=false"
       :productsDetail="productsDetail"
        :모달창열렸니="모달창열렸니" 
        :누른거="누른거" />
   </Transition>
-
 
   <div class="menu">
     <div class="menu">

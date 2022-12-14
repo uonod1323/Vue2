@@ -1,4 +1,5 @@
 <template>
+  <payModal />
   <div class="black-bg" v-if="모달창열렸니 == true">
   <div class="white-bg">
     <img :src="productsDetail[누른거].image">
@@ -6,11 +7,14 @@
     <input v-model.number="month">
     <p> {{month}}개월 선택함 : {{productsDetail[누른거].price * month}}</p>
     <button @click="closeModal">닫기</button>
+    <button @click="openPayModal">결제</button>
   </div>
 </div>
 </template>
 
 <script>
+import payModal from './components/payModal.vue';
+
 export default {
     name: 'ProductModal',
     data(){
@@ -47,7 +51,14 @@ export default {
     methods : {
       closeModal(){
         this.$emit('closeModal');
+      },
+      openPayModal(){
+        this.$emit('closeModal');
+        alert("으아아아아");
       }
+    },
+    components: {
+      payModal : payModal
     }
 }
 </script>
