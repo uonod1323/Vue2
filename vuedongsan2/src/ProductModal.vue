@@ -1,13 +1,14 @@
 <template>
-  <payModal />
-  <div class="black-bg" v-if="모달창열렸니 == true">
+<payModal @closeModal ="payModalopen=false" :payModalopen="payModalopen" :productsDetail="productsDetail" :누른거="누른거" :price="price"  />
+<div class="black-bg" v-if="모달창열렸니 == true">
   <div class="white-bg">
     <img :src="productsDetail[누른거].image">
     <h4>{{productsDetail[누른거].title}}</h4>
+    <p>{{productsDetail[누른거].content}}</p>
     <input v-model.number="month">
     <p> {{month}}개월 선택함 : {{productsDetail[누른거].price * month}}</p>
     <button @click="closeModal">닫기</button>
-    <button @click="openPayModal">결제</button>
+    <button @click ="openPayModal">결제</button>
   </div>
 </div>
 </template>
@@ -15,11 +16,15 @@
 <script>
 import payModal from './components/payModal.vue';
 
+
+
 export default {
     name: 'ProductModal',
     data(){
       return{
         month : 1, 
+        payModalopen : false,
+        price : 0,
       }
     },
     watch : {
@@ -35,7 +40,8 @@ export default {
     props : {
       productsDetail : Array,
       모달창열렸니 : String,
-      누른거 : String
+      누른거 : String,
+      warnModalOpen : String
     },
     
     updated() {
@@ -47,15 +53,18 @@ export default {
         clearInterval(interval);
       }
       }, 500);
+
+ 
     },
     methods : {
       closeModal(){
         this.$emit('closeModal');
       },
       openPayModal(){
-        this.$emit('closeModal');
-        alert("으아아아아");
-      }
+        this.payModalopen = true;
+        this.price = this.productsDetail[this.누른거].price * this.month
+        this.closeModal();
+      },
     },
     components: {
       payModal : payModal

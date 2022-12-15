@@ -1,10 +1,17 @@
-<template>  
+<template>
+  
+
   <Transition name="fade">
     <ProductModal @closeModal ="모달창열렸니=false"
       :productsDetail="productsDetail"
+       :warnModalOpen="warnModalOpen"
        :모달창열렸니="모달창열렸니" 
        :누른거="누른거" />
   </Transition>
+
+  <!-- 신고횟수가 5회 넘어가면 경고 모달창 open -->
+  <warnModal @closeModal ="warnModalOpen=false" :warnModalOpen="warnModalOpen" :reportNow="reportNow"></warnModal> 
+
 
   <div class="menu">
     <div class="menu">
@@ -20,7 +27,11 @@
   <button @click= "sortABC">이름순정렬</button>
   
   
-    <ProductList @openModal="모달창열렸니=true; 누른거 = i" :productsDetail="productsDetail[i]" v-for="(작명,i) in productsDetail" :key="i" ></ProductList>
+    <ProductList @openModal="모달창열렸니=true; 누른거 = i"
+    @report="productsDetail[i].report++"
+    :productsDetail="productsDetail[i]"
+     v-for="(작명,i) in productsDetail" :key="i" >
+     </ProductList>
 </template>
 
 <script>
@@ -28,6 +39,7 @@ import productsDetail from './assets/oneroom.js';
 import DiscountProduct from './DiscountProduct.vue';
 import ProductModal from './ProductModal.vue';
 import ProductList from './ProductList.vue';
+import warnModal from './components/warnModal.vue';
 
 export default {
   name : 'App',
@@ -38,19 +50,22 @@ export default {
       productsDetailOriginal : [...productsDetail],
       누른거 : '',
       모달창열렸니 : false,
+      warnModalOpen :false,
       메뉴들 : ['Home', 'Shop', 'About'],
       productsDetail : productsDetail,
+      reportNow : 0,
     }
   },
 
-  mounted() {
-    const interval = setInterval(() => {
-      this.countNumber--;
-      if (this.countNumber === 0) {
-        clearInterval(interval);
-      }
-    }, 1000);
-  },
+  // 협박용 시한폭탄인데 콘솔 존나쳐먹음 뭐냐이새끼?
+  // mounted() {
+  //   const interval = setInterval(() => {
+  //     this.countNumber--;
+  //     if (this.countNumber === 0) {
+  //       clearInterval(interval);
+  //     }
+  //   }, 1000);
+  // },
 
   methods : {
     increase(i){
@@ -76,10 +91,21 @@ export default {
     }
   },
 
+  watch: {
+    모달창열렸니(a){
+      if(a == true)
+        if(5 <= this.productsDetail[this.누른거].report){
+          this.warnModalOpen = true;
+          this.reportNow = this.productsDetail[this.누른거].report;
+        }
+    }
+  },
+
   components: {
     DiscountProduct : DiscountProduct,
     ProductModal : ProductModal,
-    ProductList : ProductList
+    ProductList : ProductList,
+    warnModal :warnModal
   }
 }
 </script>
@@ -131,7 +157,7 @@ div {
 .black-bg {
   width: 100%; height:100%;
   background: rgba(0,0,0,0.5);
-  position: fixed; padding: 20px;
+  position: fixed; padding: 200px;
 }
 .white-bg {
   width: 100%; background: white;
