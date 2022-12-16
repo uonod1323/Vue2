@@ -38,14 +38,12 @@
 <router-link to="/list">리스트페이지</router-link>
 <router-link to="/">홈페이지</router-link>
 
-<div v-if="this.$route.name == list">
-<router-view :TitleListArray="TitleListArray[i]" v-for="(작명, i) in TitleListArray" :key="i"></router-view>
+<div v-if="$route.path === '/list'">
+  <router-view :TitleListArray="TitleListArray[i]" v-for="(작명, i) in TitleListArray" :key="i"></router-view>
 </div>
-
-
-
-<!-- <TitleList :TitleListArray="TitleListArray[i]" v-for="(작명, i) in TitleListArray" :key="i"/> -->
-
+<div v-else>
+  <router-view :TitleListArray="TitleListArray"></router-view>
+</div>
 </template>
 
 <script>

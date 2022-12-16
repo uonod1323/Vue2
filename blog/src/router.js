@@ -9,13 +9,13 @@ const routes = [
     component: TitleList,
   },
   {
-    path: "/detail",
+    path: "/detail/:id(\\d+)",
     component: DetailList,
   },
   {
     path: "/",
     component: mainPage,
-  }
+  },
 ];
 
 const router = createRouter({
