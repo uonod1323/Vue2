@@ -35,17 +35,20 @@
   </div>
 </nav>
 
-<div class ="container mt-4">
-  <h5>블로그</h5>
-  <p>Vue</p>
+<router-link to="/list">리스트페이지</router-link>
+<router-link to="/">홈페이지</router-link>
+
+<div v-if="this.$route.name == list">
+<router-view :TitleListArray="TitleListArray[i]" v-for="(작명, i) in TitleListArray" :key="i"></router-view>
 </div>
 
-<TitleList :TitleListArray="TitleListArray"/>
+
+
+<!-- <TitleList :TitleListArray="TitleListArray[i]" v-for="(작명, i) in TitleListArray" :key="i"/> -->
 
 </template>
 
 <script>
-import TitleList from './components/TitleList.vue';
 import TitleListArray from './assets/titlelist.js';
 
 export default {
@@ -54,9 +57,6 @@ export default {
     return {
       TitleListArray : TitleListArray,
     }
-  },
-  components: {
-    TitleList : TitleList,
   }
 }
 
