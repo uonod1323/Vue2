@@ -2,15 +2,27 @@ import { createWebHistory, createRouter } from "vue-router";
 import TitleList from './components/TitleList.vue';
 import DetailList from './components/DetailList.vue';
 import mainPage from './components/mainPage.vue';
+import AuthorList from './components/AuthorList.vue';
+import CommentList from './components/CommentList.vue';
 
 const routes = [
   {
-    path: "/list",
-    component: TitleList,
+    path: "/detail/:id",
+    component: DetailList,
+    children: [
+      {
+        path: "author",
+        component: AuthorList,
+      },
+      {
+        path: "comment",
+        component: CommentList,
+      },
+    ]
   },
   {
-    path: "/detail/:id(\\d+)",
-    component: DetailList,
+    path: "/list",
+    component: TitleList,
   },
   {
     path: "/",

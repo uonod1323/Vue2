@@ -39,7 +39,7 @@
 <router-link to="/">홈페이지</router-link>
 
 <div v-if="$route.path === '/list'">
-  <router-view :TitleListArray="TitleListArray[i]" v-for="(작명, i) in TitleListArray" :key="i"></router-view>
+  <router-view :TitleListArray="TitleListArray[i]" :누른거="i" v-for="(작명, i) in TitleListArray" :key="i"></router-view>
 </div>
 <div v-else>
   <router-view :TitleListArray="TitleListArray"></router-view>
@@ -54,6 +54,7 @@ export default {
   data(){
     return {
       TitleListArray : TitleListArray,
+      누른거 : '',
     }
   }
 }
