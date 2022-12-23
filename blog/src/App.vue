@@ -35,17 +35,18 @@
   </div>
 </nav>
 
-<div class ="container mt-4">
-  <h5>블로그</h5>
-  <p>Vue</p>
+<router-link to="/list">리스트페이지</router-link>
+<router-link to="/">홈페이지</router-link>
+
+<div v-if="$route.path === '/list'">
+  <router-view :TitleListArray="TitleListArray[i]" :누른거="i" v-for="(작명, i) in TitleListArray" :key="i"></router-view>
 </div>
-
-<TitleList :TitleListArray="TitleListArray"/>
-
+<div v-else>
+  <router-view :TitleListArray="TitleListArray"></router-view>
+</div>
 </template>
 
 <script>
-import TitleList from './components/TitleList.vue';
 import TitleListArray from './assets/titlelist.js';
 
 export default {
@@ -53,10 +54,8 @@ export default {
   data(){
     return {
       TitleListArray : TitleListArray,
+      누른거 : '',
     }
-  },
-  components: {
-    TitleList : TitleList,
   }
 }
 
