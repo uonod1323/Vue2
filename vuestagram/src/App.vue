@@ -11,6 +11,8 @@
       </div>
 
       <containerForm :instaData="instaData" />
+      <button @click="more">더보기</button>
+      
 
       <div class="footer">
         <ul class="footer-button-plus">
@@ -24,6 +26,7 @@
 <script>
 import containerForm from './components/ContainerForm.vue'
 import instaData from './assets/instaData.js';
+import axios from 'axios'
 
 export default {
   name: 'App',
@@ -32,11 +35,26 @@ export default {
   data(){
     return{
       instaData : instaData,
+      currentTab : 1,
+      clickCount : -1,
+      step : 0,               //현재 페이지의 상태
     }
   },  
   components: {
     containerForm : containerForm,
-
+  },
+  methods :{
+    more(){
+      this.clickCount++;
+      console.log(this.clickCount);
+      axios.get(`https://codingapple1.github.io/vue/more${this.clickCount}.json`)
+      .then((result)=>{
+        //요청성공시에 실행할 코드
+        this.instaData.push(result.data);
+      }).catch((err)=>{
+        alert(err);
+      });
+    },
   }
 }
 </script>

@@ -1,9 +1,23 @@
 <template>
   <div>
-    컨테이너임
-    <postList :instaData="instaData[0]"/>
-    <postList :instaData="instaData[1]"/>
-    <postList :instaData="instaData[2]"/>
+    <postList v-for="(arrays, i) in instaData" :key="i" :instaData="instaData[i]"/>
+
+    <!-- 필터선택페이지 -->
+  <div class="upload-image"></div>
+  <div class="filters">
+    <div class="filter-1"></div>
+    <div class="filter-1"></div>
+    <div class="filter-1"></div>
+    <div class="filter-1"></div>
+    <div class="filter-1"></div>
+  </div>
+
+<!-- 글작성페이지 -->
+  <div class="upload-image"></div>
+  <div class="write">
+    <textarea class="write-box">write!</textarea>
+  </div>
+
   </div>
 </template>
 
@@ -17,7 +31,7 @@ export default {
     },
   data(){
     return{
-
+      
     }
   },
   

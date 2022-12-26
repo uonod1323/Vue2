@@ -1,10 +1,10 @@
 <template>
   <div class="post">
     <div class="post-header">
-      <div class="profile" style="background-image:{{instaData.userImage}}"></div>
+      <div class="profile" :style="{ backgroundImage : `url(${instaData.userImage})`}"></div>
       <span class="profile-name">{{instaData.name}}</span>
     </div>
-    <div class="post-body"></div>
+    <div class="post-body" :style="{ backgroundImage : `url(${instaData.postImage})`}"></div>
     <div class="post-content">
       <p>{{instaData.likes}}</p>
       <p><strong>{{instaData.name}}</strong> {{instaData.content}}</p>
@@ -50,7 +50,6 @@ export default {
   padding: 10px;
 }
 .post-body {
-  background-image: url("https://placeimg.com/640/480/animals");
   height: 450px;
   background-position: center;
   background-size: cover;
