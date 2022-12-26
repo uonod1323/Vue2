@@ -10,7 +10,7 @@
         <img src="./assets/logo.png" class="logo" />
       </div>
 
-      <containerForm :instaData="instaData" />
+      <containerForm :instaData="instaData" :step="step" />
       <button @click="more">더보기</button>
       
 
