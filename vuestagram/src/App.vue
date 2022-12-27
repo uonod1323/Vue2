@@ -2,31 +2,31 @@
   <div>
       <div class="header">
         <ul class="header-button-left">
-          <li>Cancel</li>
+          <li @click="movePrev">Cancel</li>
         </ul>
         <ul class="header-button-right">
-          <li>Next</li>
+          <li v-if="this.step == 1" @click="moveNext">Next</li>
+          <li v-if="this.step == 2" @click="publish">발행</li>
         </ul>
         <img src="./assets/logo.png" class="logo" />
       </div>
 
-      <containerForm :instaData="instaData" :step="step" />
+      <containerForm @childrenURL="자식주소 = $event" :instaData="instaData" :step="step" :url="url" :isPublish="isPublish" />
       <button @click="more">더보기</button>
-      
 
       <div class="footer">
         <ul class="footer-button-plus">
-          <input type="file" id="file" class="inputfile" />
+          <input @change="upload" type="file" id="file" class="inputfile" />
           <label for="file" class="input-plus">+</label>
         </ul>
-    </div>
+      </div>
   </div>
 </template>
 
 <script>
 import containerForm from './components/ContainerForm.vue'
 import instaData from './assets/instaData.js';
-import axios from 'axios'
+import axios from 'axios';
 
 export default {
   name: 'App',
@@ -38,6 +38,8 @@ export default {
       currentTab : 1,
       clickCount : -1,
       step : 0,               //현재 페이지의 상태
+      url : '',
+      isPublish : 0,  //발행 상태. 0 은 미발행.
     }
   },  
   components: {
@@ -55,6 +57,40 @@ export default {
         alert(err);
       });
     },
+    upload(e){
+      let 파일 = e.target.files;
+      console.log(파일[0]);
+      let url = URL.createObjectURL(파일[0]);
+      console.log(url);
+      this.step = 1;
+      this.url = url;
+    },
+    moveNext(){
+      if(this.step < 2){
+        this.step++
+      }
+    },
+    movePrev(){
+      if(0 < this.step){
+        this.step--
+      }
+    },
+    publish(){
+      this.isPublish = 1;
+      console.log("자식주소 = " + this.자식주소);
+      var 내게시물 = {
+        name: "Kim Hyun",
+        userImage: "https://placeimg.com/100/100/arch",
+        postImage: this.자식주소,
+        likes: 36,
+        date: "May 15",
+        liked: false,
+        content: "오늘 무엇을 했냐면요 아무것도 안했어요 ?",
+        filter: "perpetua"
+      };
+      this.instaData.unshift(내게시물);
+      this.step = 0;
+    }
   }
 }
 </script>
