@@ -11,7 +11,7 @@
         <img src="./assets/logo.png" class="logo" />
       </div>
 
-      <containerForm @childrenURL="자식주소 = $event" :instaData="instaData" :step="step" :url="url" :isPublish="isPublish" />
+      <containerForm @write="작성한글 = $event" :instaData="instaData" :step="step" :url="url" />
       <button @click="more">더보기</button>
 
       <div class="footer">
@@ -39,7 +39,7 @@ export default {
       clickCount : -1,
       step : 0,               //현재 페이지의 상태
       url : '',
-      isPublish : 0,  //발행 상태. 0 은 미발행.
+      작성한글 : '',
     }
   },  
   components: {
@@ -76,16 +76,16 @@ export default {
       }
     },
     publish(){
-      this.isPublish = 1;
-      console.log("자식주소 = " + this.자식주소);
+      console.log("작성한글 = " + this.작성한글);
+      console.log("작성한글 = " + this.url);
       var 내게시물 = {
         name: "Kim Hyun",
         userImage: "https://placeimg.com/100/100/arch",
-        postImage: this.자식주소,
+        postImage: this.url,
         likes: 36,
         date: "May 15",
         liked: false,
-        content: "오늘 무엇을 했냐면요 아무것도 안했어요 ?",
+        content: this.작성한글,
         filter: "perpetua"
       };
       this.instaData.unshift(내게시물);

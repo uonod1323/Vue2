@@ -20,7 +20,7 @@
   <div v-if="step == 2">
     <div class="upload-image" :style="{ backgroundImage : `url(${url})`}"></div>
     <div class="write">
-      <textarea class="write-box" @click="chk">write!</textarea>
+      <textarea @input="$emit('write', $event.target.value)" class="write-box">write!</textarea>
     </div>
   </div>
 
@@ -36,18 +36,10 @@ export default {
     instaData : Array,
     step : Number,
     url : String,
-    isPublish : Number,
     },
   data(){
     return{
       
-    }
-  },
-  watch : {
-    isPublish(a){
-      if(a < 1){
-        this.$emit('childrenURL',this.url);
-      }
     }
   },
   components: {
