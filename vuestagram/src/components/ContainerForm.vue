@@ -8,11 +8,7 @@
   <div  v-if="step == 1">
     <div class="upload-image" :style="{ backgroundImage : `url(${url})`}"></div>
     <div class="filters">
-      <div class="filter-1"></div>
-      <div class="filter-1"></div>
-      <div class="filter-1"></div>
-      <div class="filter-1"></div>
-      <div class="filter-1"></div>
+      <FilterBox v-for="(arrays, i) in instaFilter" :key="i" :url="url"></FilterBox>
     </div>
   </div>
 
@@ -29,6 +25,8 @@
 
 <script>
 import postList from './PostList.vue'
+import FilterBox from  './FilterBox.vue'
+import instaFilter from '../assets/instaFilter.js';
 
 export default {
   name: 'ContainerForm',
@@ -39,11 +37,12 @@ export default {
     },
   data(){
     return{
-      
+      instaFilter : instaFilter,
     }
   },
   components: {
     postList : postList,
+    FilterBox: FilterBox,
   }
 }
 </script>
@@ -58,16 +57,6 @@ export default {
   .filters{
   overflow-x:scroll;
   white-space: nowrap;
-  }
-  .filter-1 {
-  width: 100px;
-  height: 100px;
-  background-color: cornflowerblue;
-  margin: 10px 10px 10px auto;
-  padding: 8px;
-  display: inline-block;
-  color : white;
-  background-size: cover;
   }
   .filters::-webkit-scrollbar {
   height: 5px;
