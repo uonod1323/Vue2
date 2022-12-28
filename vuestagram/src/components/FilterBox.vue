@@ -1,7 +1,5 @@
 <template>
-    <div>
-        <div class="filter-item" :style="{ backgroundImage : `url(${url})`}"></div> 
-    </div>
+    <div class="filter-item" :style="{ backgroundImage : `url(${url})`}"></div> 
 </template>
 
 <script>
@@ -10,7 +8,7 @@ import instaFilter from '../assets/instaFilter.js';
 export default {
     data(){
         return{
-        instaFilter : instaFilter,
+            instaFilter : instaFilter,
         }
     },  
     name : 'FilterBox',
