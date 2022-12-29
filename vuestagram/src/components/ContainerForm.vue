@@ -8,7 +8,9 @@
   <div  v-if="step == 1">
     <div class="upload-image" :style="{ backgroundImage : `url(${url})`}"></div>
     <div class="filters">
-      <FilterBox v-bind:class="[instaFilter[i]]" v-for="(arrays, i) in instaFilter" :key="i" :url="url"></FilterBox>
+      <FilterBox :class="[instaFilter[i]]" v-for="(arrays, i) in instaFilter" :key="i" :url="url">
+        <span>{{instaFilter[i]}}</span>
+      </FilterBox>
     </div>
   </div>
 

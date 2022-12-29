@@ -1,5 +1,8 @@
 <template>
-    <div class="filter-item" :style="{ backgroundImage : `url(${url})`}"></div> 
+    
+    <div class="filter-item" :style="{ backgroundImage : `url(${url})`}">
+        <slot></slot>
+    </div> 
 </template>
 
 <script>
@@ -9,6 +12,7 @@ export default {
     data(){
         return{
             instaFilter : instaFilter,
+            msg : 'hello'
         }
     },  
     name : 'FilterBox',
@@ -16,6 +20,7 @@ export default {
     url : String,
     },
 }
+
 </script>
 
 <style>
