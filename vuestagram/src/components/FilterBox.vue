@@ -2,6 +2,7 @@
     
     <div class="filter-item" :style="{ backgroundImage : `url(${url})`}">
         <slot></slot>
+        <button @click="fire">버튼</button>
     </div> 
 </template>
 
@@ -19,6 +20,11 @@ export default {
     props : {
     url : String,
     },
+    methods :{
+        fire(){
+            this.emitter.emit('작명', '데이터');
+        },
+    }
 }
 
 </script>

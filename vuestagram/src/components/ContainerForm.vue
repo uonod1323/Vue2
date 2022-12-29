@@ -6,9 +6,9 @@
 
     <!-- 필터선택페이지 -->
   <div  v-if="step == 1">
-    <div class="upload-image" :style="{ backgroundImage : `url(${url})`}"></div>
+    <div class="upload-image" :class="[nowFilter]" :style="{ backgroundImage : `url(${url})`}"></div>
     <div class="filters">
-      <FilterBox :class="[instaFilter[i]]" v-for="(arrays, i) in instaFilter" :key="i" :url="url">
+      <FilterBox @click="applyFilter(instaFilter[i])" :class="[instaFilter[i]]" v-for="(arrays, i) in instaFilter" :key="i" :url="url">
         <span>{{instaFilter[i]}}</span>
       </FilterBox>
     </div>
@@ -40,7 +40,13 @@ export default {
   data(){
     return{
       instaFilter : instaFilter,
+      nowFilter : '',
     }
+  },
+  methods:{
+    applyFilter(filter){
+        this.nowFilter = filter;
+        },
   },
   components: {
     postList : postList,

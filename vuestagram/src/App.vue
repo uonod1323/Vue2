@@ -41,7 +41,12 @@ export default {
       url : '',
       작성한글 : '',
     }
-  },  
+  },
+  mounted(){
+    this.emitter.on('applyFilter', (filter)=>{
+      console.log(filter);
+    });
+  },
   components: {
     containerForm : containerForm,
   },
