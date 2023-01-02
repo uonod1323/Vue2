@@ -10,12 +10,14 @@
         </ul>
         <img src="./assets/logo.png" class="logo" />
       </div>
+      <h4>나이 {{ $store.state.age }}</h4>
+      <button @click="$store.commit('나이증가', 10)">버튼</button>
 
       <containerForm @write="작성한글 = $event" :instaData="instaData" :step="step" :url="url" />
       <button @click="more">더보기</button>
 
       <div class="footer">
-        <ul class="footer-button-plus">
+        <ul class="footer-button-plus">2
           <input @change="upload" type="file" id="file" class="inputfile" />
           <label for="file" class="input-plus">+</label>
         </ul>
@@ -40,12 +42,15 @@ export default {
       step : 0,               //현재 페이지의 상태
       url : '',
       작성한글 : '',
+      nowFilter : '',
     }
   },
   mounted(){
     this.emitter.on('applyFilter', (filter)=>{
-      console.log(filter);
+      this.nowFilter = filter;  
     });
+    //0번 데이터의 좋아요를 store.js의 좋아요로 변경
+    this.instaData[0].likes = this.$store.state.likes
   },
   components: {
     containerForm : containerForm,
@@ -91,7 +96,7 @@ export default {
         date: "May 15",
         liked: false,
         content: this.작성한글,
-        filter: "perpetua"
+        filter: this.nowFilter,
       };
       this.instaData.unshift(내게시물);
       this.step = 0;

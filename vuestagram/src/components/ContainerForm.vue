@@ -6,7 +6,7 @@
 
     <!-- 필터선택페이지 -->
   <div  v-if="step == 1">
-    <div class="upload-image" :class="[nowFilter]" :style="{ backgroundImage : `url(${url})`}"></div>
+    <div class="upload-image" @dblclick="$store.commit('좋아요', true)" :class="[nowFilter]" :style="{ backgroundImage : `url(${url})`}"></div>
     <div class="filters">
       <FilterBox @click="applyFilter(instaFilter[i])" :class="[instaFilter[i]]" v-for="(arrays, i) in instaFilter" :key="i" :url="url">
         <span>{{instaFilter[i]}}</span>
@@ -16,7 +16,7 @@
 
   <!-- 글작성페이지 -->
   <div v-if="step == 2">
-    <div class="upload-image" :style="{ backgroundImage : `url(${url})`}"></div>
+    <div class="upload-image" :class="[nowFilter]" :style="{ backgroundImage : `url(${url})`}"></div>
     <div class="write">
       <textarea @input="$emit('write', $event.target.value)" class="write-box">write!</textarea>
     </div>
@@ -46,6 +46,7 @@ export default {
   methods:{
     applyFilter(filter){
         this.nowFilter = filter;
+        this.emitter.emit('applyFilter', filter);
         },
   },
   components: {

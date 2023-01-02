@@ -1,5 +1,4 @@
-<template>
-    
+<template>  
     <div class="filter-item" :style="{ backgroundImage : `url(${url})`}">
         <slot></slot>
         <button @click="fire">버튼</button>
@@ -7,24 +6,16 @@
 </template>
 
 <script>
-import instaFilter from '../assets/instaFilter.js';
 
 export default {
     data(){
         return{
-            instaFilter : instaFilter,
-            msg : 'hello'
         }
     },  
     name : 'FilterBox',
     props : {
     url : String,
     },
-    methods :{
-        fire(){
-            this.emitter.emit('작명', '데이터');
-        },
-    }
 }
 
 </script>
