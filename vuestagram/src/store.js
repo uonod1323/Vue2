@@ -12,6 +12,9 @@ const store = createStore({
     나이증가(state, data){
         state.age += data;
     },
+    좋아요(state){
+        state.likes++;
+    }
   }
 })
 

@@ -6,7 +6,7 @@
 
     <!-- 필터선택페이지 -->
   <div  v-if="step == 1">
-    <div class="upload-image" @dblclick="$store.commit('좋아요', true)" :class="[nowFilter]" :style="{ backgroundImage : `url(${url})`}"></div>
+    <div class="upload-image" :class="[nowFilter]" :style="{ backgroundImage : `url(${url})`}"></div>
     <div class="filters">
       <FilterBox @click="applyFilter(instaFilter[i])" :class="[instaFilter[i]]" v-for="(arrays, i) in instaFilter" :key="i" :url="url">
         <span>{{instaFilter[i]}}</span>

@@ -17,7 +17,7 @@
       <button @click="more">더보기</button>
 
       <div class="footer">
-        <ul class="footer-button-plus">2
+        <ul class="footer-button-plus">
           <input @change="upload" type="file" id="file" class="inputfile" />
           <label for="file" class="input-plus">+</label>
         </ul>
@@ -52,6 +52,9 @@ export default {
     //0번 데이터의 좋아요를 store.js의 좋아요로 변경
     this.instaData[0].likes = this.$store.state.likes
   },
+
+  //store.js의 data를 관측가능한가?
+
   components: {
     containerForm : containerForm,
   },
