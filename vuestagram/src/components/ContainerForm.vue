@@ -22,12 +22,18 @@
     </div>
   </div>
 
+  <!-- 팔로워 페이지 -->
+  <div v-if="step == 3">
+    <MyPage/>
+  </div>
+
 </div>
 </template>
 
 <script>
 import postList from './PostList.vue'
 import FilterBox from  './FilterBox.vue'
+import MyPage from  './MyPage.vue'
 import instaFilter from '../assets/instaFilter.js';
 
 export default {
@@ -52,6 +58,7 @@ export default {
   components: {
     postList : postList,
     FilterBox: FilterBox,
+    MyPage : MyPage,
   }
 }
 </script>

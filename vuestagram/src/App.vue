@@ -50,7 +50,7 @@ export default {
       instaData : instaData,
       currentTab : 1,
       clickCount : -1,
-      step : 0,               //현재 페이지의 상태
+      step : 3,               //현재 페이지의 상태
       url : '',
       작성한글 : '',
       nowFilter : '',
