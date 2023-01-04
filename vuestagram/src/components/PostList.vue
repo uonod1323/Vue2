@@ -6,7 +6,7 @@
     </div>
     <div :class="instaData.filter" class="post-body"  @click="$store.commit('좋아요')" :style="{ backgroundImage : `url(${instaData.postImage})`}"></div>
     <div class="post-content">
-      <p>{{instaData.likes}}</p>
+      <p>{{$store.state.likes}}</p>
       <p><strong>{{instaData.name}}</strong> {{instaData.content}}</p>
       <p class="date">{{instaData.date}}</p>
     </div>
@@ -21,10 +21,11 @@ export default {
     },
   data(){
     return{
-
+      좋아요눌러슴 : false,
     }
   },
 }
+
 </script>
 
 <style>

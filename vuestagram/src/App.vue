@@ -10,11 +10,21 @@
         </ul>
         <img src="./assets/logo.png" class="logo" />
       </div>
+
+      <p>{{ 내이름 }}</p>
+      <p>{{ age }}</p>
+      <p>{{ likes }}</p>
       <h4>나이 {{ $store.state.age }}</h4>
-      <button @click="$store.commit('나이증가', 10)">버튼</button>
+      <button @click="나이증가(10)">버튼</button>
+
+      <p>{{ $store.state.more }}</p>
+      <button @click="$store.dispatch('getData')">더보기axios</button>
 
       <containerForm @write="작성한글 = $event" :instaData="instaData" :step="step" :url="url" />
       <button @click="more">더보기</button>
+
+      <p>{{ now2 }} {{ 카운터 }}</p>
+      <button @click = "카운터++">버튼</button>
 
       <div class="footer">
         <ul class="footer-button-plus">
@@ -29,6 +39,7 @@
 import containerForm from './components/ContainerForm.vue'
 import instaData from './assets/instaData.js';
 import axios from 'axios';
+import { mapMutations, mapState } from 'vuex';
 
 export default {
   name: 'App',
@@ -43,14 +54,13 @@ export default {
       url : '',
       작성한글 : '',
       nowFilter : '',
+      카운터: 0,
     }
   },
   mounted(){
     this.emitter.on('applyFilter', (filter)=>{
       this.nowFilter = filter;  
     });
-    //0번 데이터의 좋아요를 store.js의 좋아요로 변경
-    this.instaData[0].likes = this.$store.state.likes
   },
 
   //store.js의 data를 관측가능한가?
@@ -58,7 +68,20 @@ export default {
   components: {
     containerForm : containerForm,
   },
+  computed : {
+    now2(){
+      return new Date();
+    },
+    ...mapState(['name', 'age', 'likes']),
+    ...mapState({내이름 : 'name', }),
+  },
+
   methods :{
+    ...mapMutations(['setMore', '좋아요', '나이증가']),
+
+    now(){
+      return new Date();
+    },
     more(){
       this.clickCount++;
       console.log(this.clickCount);
