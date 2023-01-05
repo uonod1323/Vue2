@@ -24,7 +24,7 @@
 
   <!-- 팔로워 페이지 -->
   <div v-if="step == 3">
-    <MyPage/>
+    <MyPage :one="1"/>
   </div>
 
 </div>

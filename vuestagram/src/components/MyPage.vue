@@ -10,13 +10,17 @@
 </template>
 
 <script>
-import {onMounted, ref} from 'vue';
+import {onMounted, reactive, ref} from 'vue';
 import axios from 'axios';
 
 export default {
     name : 'MyPage',
-    setup(){
+    props : {
+        one : Number,
+    },
+    setup(props){
         let follower = ref([]);
+        props
 
         onMounted(()=>{
             axios.get('/follower.json').then((a)=>{
@@ -35,6 +39,6 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 </style>
