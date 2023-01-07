@@ -1,7 +1,7 @@
 <template>
     <div style="padding : 10px">
         <h4>팔로워</h4>
-        <input placeholder="?" @keyup="doThis" id="input"/>
+        <input placeholder="?" @keyup="search($event.target.value)" id="input"/>
         <div class="post-header" v-for = "(a,i) in follower" :key="i">
             <div class="profile" :style="`background-image:url(${a.image})`"></div>
             <span class="profile-name">{{ a.name }}</span>
@@ -10,39 +10,30 @@
 </template>
 
 <script>
-import {onMounted, toRefs, watch, ref, computed} from 'vue';
+import {onMounted, ref, computed} from 'vue';
 import axios from 'axios';
 import {useStore} from 'vuex'
 
 export default {
     name : 'MyPage',
-    props : {
-        one : Number,
-        two : Number,
-    },
+
     data(){
         return{
         searchData : '',
         }
     },
-    setup(props){
+    setup(){
         let follower = ref([]);
+        let followerOriginal = ref([]);
 
-        function doThis(){
-        this.searchData = document.querySelector('#input').value;
-        
-
-         let names = [];
-        for(let i=0; i<follower.value.length; i++){
-             names.push(follower.value[i].name);
-        }
-        const matches = names.filter(name => name.toLowerCase().startsWith(this.searchData));
-        console.log(matches);
+        function search(검색어){
+        let newFollower = followerOriginal.value.filter((a)=>{
+            return a.name.indexOf(검색어) != -1
+        });
+        follower.value = [...newFollower]
         }
 
-        let {one, two} = toRefs(props);
-        console.log(one.value);
-        console.log(two.value);
+
 
         
 
@@ -55,18 +46,15 @@ export default {
         let store = useStore();
         console.log(store.state.name)
 
-        watch(one, ()=>{
-
-        })
-
         onMounted(()=>{
-            axios.get('/follower.json').then((a)=>{
-                follower.value = a.data
-            });
+        axios.get('/follower.json').then((a)=>{
+            follower.value = a.data;
+            followerOriginal.value = [...a.data];
         })
+        });
 
        
-        return {follower, doThis}
+        return {follower, search}
     },
 }
 </script>
