@@ -1,15 +1,26 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <category></category>
+  <page></page>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// Import the component
+import 'bootstrap'
+import Category from './components/Category.vue';
+import Page from './components/Page.vue';
 
 export default {
   name: 'App',
+  data(){
+    return {
+      currentCategory : 'Home',
+    }
+  },
+
+  // Register the component
   components: {
-    HelloWorld
+    category : Category,
+    page : Page
   }
 }
 </script>
@@ -21,6 +32,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
