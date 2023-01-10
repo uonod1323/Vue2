@@ -8,12 +8,24 @@
 import 'bootstrap'
 import Category from './components/Category.vue';
 import Page from './components/Page.vue';
+import mongoose from 'mongoose';
+
+mongoose.connect('mongodb+srv://uonod1323:qwer1234@hongodb.rtsccuj.mongodb.net/test', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  // we're connected!
+});
 
 export default {
   name: 'App',
   data(){
     return {
-      currentCategory : 'Home',
+      
     }
   },
 
