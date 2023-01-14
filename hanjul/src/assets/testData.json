@@ -1,0 +1,10 @@
+[
+    { "id" : 0, "name" : "Elster", "date" : "20230110", "category" : "game", "name" : "마이티 No.9", "opnion" : "개망작임 사지마라. 라이브러리 더러워짐", "emotion" : "anger", "grade":"trash"},
+    { "id" : 1, "name" : "Elster", "date" : "20230115", "category" : "game", "name" : "데스 스트랜딩", "opnion" : "아니 이게 왜 재밌지?", "emotion" : "sad" , "grade":"good" },
+    { "id" : 2, "name" : "Elster", "date" : "20230120", "category" : "game", "name" : "크립트 오브 더 네크로댄서", "opnion" : "좆같이 어렵네 시발", "emotion" : "anger", "grade":"great" },
+]
+
+
+
+
+

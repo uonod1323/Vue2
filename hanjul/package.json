@@ -8,8 +8,16 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+<<<<<<< HEAD
     "core-js": "^3.8.3",
     "vue": "^3.2.13"
+=======
+    "bootstrap": "^5.2.3",
+    "core-js": "^3.8.3",
+    "mongoose": "^6.8.3",
+    "vue": "^3.2.13",
+    "vuex": "^4.0.2"
+>>>>>>> be77dbf87d049e4f7b698d85b46786058c1c1f4a
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
@@ -32,7 +40,13 @@
     "parserOptions": {
       "parser": "@babel/eslint-parser"
     },
+<<<<<<< HEAD
     "rules": {}
+=======
+    "rules": {
+      "vue/multi-word-component-names": "off"
+    }
+>>>>>>> be77dbf87d049e4f7b698d85b46786058c1c1f4a
   },
   "browserslist": [
     "> 1%",
